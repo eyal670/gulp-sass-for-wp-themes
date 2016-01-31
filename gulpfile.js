@@ -134,7 +134,7 @@ gulp.task('copy', function() {
   //   .pipe(gulp.dest('assets/javascript/vendor/motion-ui'));
 
   // What Input
-  var imgs = gulp.src('imgs/**/*.*')
+  var img = gulp.src('img/**/*.*')
     //  .pipe($.flatten())
       .pipe(gulp.dest('../images'));
 
@@ -142,7 +142,7 @@ gulp.task('copy', function() {
   // var fonts = gulp.src('/fonts/**/*.*')
   //     .pipe(gulp.dest('../fonts'));
 
-  return merge(imgs);
+  return merge(img);
 });
 
 // Package task
