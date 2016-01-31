@@ -2,7 +2,7 @@
 *.sass-cache*
 *.log
 node_modules/
-imgs/*
+img/*
 assets/stylesheets/
 assets/components/
 js/vendor/
