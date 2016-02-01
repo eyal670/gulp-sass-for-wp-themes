@@ -10,23 +10,25 @@ var sequence    = require('run-sequence');
 var colors      = require('colors');
 var dateFormat  = require('dateformat');
 
-// get present working directory
+// get relevant paths
 var pwd = __dirname.split("\\").pop();
 var themeName = __dirname.split("\\").reverse()[1];
 var wordpressDir = __dirname.split("\\wp-content\\").shift();
 var wordpressDir = wordpressDir.split("\\www\\").pop();
-
+// show relevant paths setup
+gulp.task("dir", function(){
+  var dirSetup = "\n" + "-----------------------" + "\n";
+      dirSetup += "tool dir = " + pwd + "\n";
+      dirSetup += "wordpress dir = " + wordpressDir + "\n";
+      dirSetup += "theme name = " + themeName + "\n";
+      dirSetup += "-----------------------" + "\n";
+  console.log(dirSetup);
+});
 
 // Enter URL of your local server here
 // Example: 'http://localwebsite.dev'
 // setting server url to current wordpress instant
 var URL = 'localhost/'+wordpressDir;
-
-gulp.task("dir", function(){
-  console.log("pwd = "+pwd);
-  console.log("wordpressDir = "+wordpressDir);
-  console.log("theme name = "+themeName);
-});
 
 // Check for --production flag
 var isProduction = !!(argv.production);
@@ -54,7 +56,7 @@ gulp.task('browser-sync', ['build'], function() {
 
   var files = [
             '../**/*.php',
-            'images/**/*.{png,jpg,gif}'
+            '../images/**/*.{png,jpg,gif}'
           ];
 
   browserSync.init(files, {
@@ -165,20 +167,9 @@ gulp.task('build', function(done) {
           done);
 });
 
-// PHP Code Sniffer task
-gulp.task('phpcs', function() {
-  return gulp.src(['*.php'])
-    .pipe($.phpcs({
-      bin: 'wpcs/vendor/bin/phpcs',
-      standard: './codesniffer.ruleset.xml',
-      showSniffCode: true,
-    }))
-    .pipe($.phpcs.reporter('log'));
-});
-
 // PHP Code Beautifier task
 gulp.task('phpcbf', function () {
-  return gulp.src(['*.php'])
+  return gulp.src(['../*.php'])
   .pipe($.phpcbf({
     bin: 'wpcs/vendor/bin/phpcbf',
     standard: './codesniffer.ruleset.xml',
