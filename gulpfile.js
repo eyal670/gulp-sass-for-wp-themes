@@ -10,18 +10,27 @@ var sequence    = require('run-sequence');
 var colors      = require('colors');
 var dateFormat  = require('dateformat');
 
-// get relevant paths
+// get or relevant paths
 var pwd = __dirname.split("\\").pop();
 var themeName = __dirname.split("\\").reverse()[1];
 var wordpressDir = __dirname.split("\\wp-content\\").shift();
 var wordpressDir = wordpressDir.split("\\www\\").pop();
+var themeCSS = "css";
+var themeJS = "js";
+var themeImages = "images";
+
 // show relevant paths setup
 gulp.task("dir", function(){
-  var dirSetup = "\n" + "-----------------------" + "\n";
-      dirSetup += "tool dir = " + pwd + "\n";
-      dirSetup += "wordpress dir = " + wordpressDir + "\n";
-      dirSetup += "theme name = " + themeName + "\n";
-      dirSetup += "-----------------------" + "\n";
+  var dirSetup = "\n" + "--- directory paths setup ---".bgRed + "\n";
+      dirSetup += "*"+"auto generated".yellow;
+      dirSetup += " *"+"hard coded".magenta + "\n\n";
+      dirSetup += "tool dir = " + (pwd).yellow + "\n";
+      dirSetup += "wordpress dir = " + (wordpressDir).yellow + "\n";
+      dirSetup += "theme name = " + (themeName).yellow + "\n";
+      dirSetup += "theme css folder = " + (themeCSS).magenta + "\n";
+      dirSetup += "theme js folder = " + (themeJS).magenta + "\n";
+      dirSetup += "theme images folder = " + (themeImages).magenta + "\n";
+      dirSetup += "-----------------------------".bgRed + "\n";
   console.log(dirSetup);
 });
 
@@ -88,7 +97,7 @@ gulp.task('sass', function() {
     }))
     .pipe(minifycss)
     .pipe($.if(!isProduction, $.sourcemaps.write('.')))
-    .pipe(gulp.dest('../css'))
+    .pipe(gulp.dest('../'+themeCSS))
     .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
@@ -124,7 +133,7 @@ gulp.task('javascript', function() {
     .pipe($.concat('native-code.js'))
     .pipe($.if(isProduction, uglify))
     .pipe($.if(!isProduction, $.sourcemaps.write()))
-    .pipe(gulp.dest('../js'))
+    .pipe(gulp.dest('../'+themeJS))
     .pipe(browserSync.stream());
 });
 
@@ -138,7 +147,7 @@ gulp.task('copy', function() {
   // What Input
   var img = gulp.src('img/**/*.*')
     //  .pipe($.flatten())
-      .pipe(gulp.dest('../images'));
+      .pipe(gulp.dest('../'+themeImages));
 
   // Font Awesome
   // var fonts = gulp.src('/fonts/**/*.*')
