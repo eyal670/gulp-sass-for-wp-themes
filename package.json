@@ -1,20 +1,18 @@
 {
-  "name": "gulp-sass for wordpress themes",
+  "name": "gulp-sass-for-wp-themes",
   "version": "0.1.0",
   "description": "working on wordpress themes with sass and browser-sync",
-  "main": "#",
+  "main": "gulpfile.js",
   "scripts": {
     "build": "gulp build",
     "package": "gulp package",
-    "phpcs": "gulp phpcs",
     "phpcbf": "gulp phpcbf",
-    "postinstall": "bower install && gulp build",
     "production": "gulp --production",
     "watch": "gulp"
   },
   "repository": {
     "type": "git",
-    "url": "none"
+    "url": "https://github.com/eyal670/gulp-sass-for-wp-themes.git"
   },
   "keywords": [
     "wordpress",
@@ -25,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.1.0",
-    "bower": "~1.6.4",
     "browser-sync": "^2.10.0",
     "colors": "^1.1.2",
     "dateformat": "^1.0.12",
@@ -39,7 +36,6 @@
     "gulp-minify-css": "^1.2.2",
     "gulp-notify": "^2.2.0",
     "gulp-phpcbf": "latest",
-    "gulp-phpcs": "^1.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-sass": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
